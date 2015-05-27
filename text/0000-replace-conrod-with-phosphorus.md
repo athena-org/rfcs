@@ -18,7 +18,8 @@ As well, Conrod is built around and heavily uses the Piston engine for rendering
 As mentioned, Phosphorus lacks certain features for it to be used in Zeus, these should be implemented first. The following features have to be added to Phosphorus for it to be useable:
 
 - [x] Implement text rendering on widgets that include text
-- [ ] Add button widgets with click callbacks
+- [ ] Add text field widget for text input
+- [x] Add button widgets with click callbacks
 
 After those are done, the crate *zeusgui* should be adjusted to use Phosphorus instead of Conrod.
 
