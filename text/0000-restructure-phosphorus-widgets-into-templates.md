@@ -29,32 +29,31 @@ struct MyController {
 }
 
 // Set up a view template
-let template = template::new()
-    .with_element(template::new_text().with_text("Hello!"))
-    .with_element(template::new_controller<MyController>("MainController")
-        .with_element(template::new_text().for(c => c.text_value))
+let template = Layout::new()
+    .with_element(Text::new().with_text("Hello!"))
+    .with_element(Controller::<MyController>::new()
+        .with_binding("MainController")
+        .with_element(Text::new().bind(c => c.text_value))
     )
 );
 
 
 // # Code that requires gfx templates:
 
-// Load the elements into a Gui
-let gui = gui::new(&mut gfx_stream, template);
+// Load the elements into a GUI
+let gui = gui::new(&mut gfx_factory, template);
 
-// Set the actual controller data
+// Bind the controllers to their names
 let controller = MyController { text_value: "Hello World!" };
-gui.set_controller("MainController", controller);
+gui.bind_controller("MainController", &mut controller);
 
 // Display the Gui
 gui.draw(&mut gfx_stream);
 ```
 
-`set_controller` performs runtime dynamic casting using `std::any` to pass the data to the actual controller.
-
 # Drawbacks
 
-This system is vastly more complex to implement that the previous static widgets system.
+This system is more complex to implement that the previous static widgets system.
 
 # Alternatives
 
