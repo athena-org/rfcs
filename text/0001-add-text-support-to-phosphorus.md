@@ -1,7 +1,7 @@
 - Feature Name: add_text_support_to_phosphorus
 - Affected Projects: Phosphorus, Any Phosphorus Users
 - Start Date: 2015-05-07
-- RFC PR: (leave this empty)
+- RFC PR: athena-org/rfcs#1
 
 # Summary
 
