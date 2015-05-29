@@ -1,7 +1,7 @@
 - Feature Name: replace_conrod_with_phosphorus
 - Affected Projects: Zeus, Phosphorus
 - Start Date: 2015-05-01
-- RFC PR: (leave this empty)
+- RFC PR: [athena-org/rfcs#2](https://github.com/athena-org/rfcs/pull/2)
 
 # Summary
 
