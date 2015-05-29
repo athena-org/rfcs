@@ -1,7 +1,7 @@
 - Feature Name: restructure_phosphorus_widgets_into_templates
 - Affected Projects: Phosphorus, Any Phosphorus Users
 - Start Date: 2015-05-27
-- RFC PR: (leave this empty)
+- RFC PR: [athena-org/rfcs#3](https://github.com/athena-org/rfcs/pull/3)
 
 # Summary
 
