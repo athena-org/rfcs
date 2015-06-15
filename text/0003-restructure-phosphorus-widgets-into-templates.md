@@ -28,14 +28,14 @@ struct MyController {
     pub text_value: String
 }
 
-// Set up a view template
-let template = Layout::new()
-    .with_element(Text::new().with_text("Hello!"))
-    .with_element(Controller::<MyController>::new()
-        .with_binding("MainController")
-        .with_element(Text::new().bind(c => c.text_value))
-    )
-);
+let template = TemplateElement::new("layout")
+    .with_attr("style_size", "[600, 500]")
+    .with_attr("style_background", "[21, 23, 24]")
+    .with_child(TemplateElement::new("text").with_attr("value", "Hello world!"))
+    .with_child(TemplateElement::new("let")
+        .with_attr_bind("hello", "{new(\"HelloController\")}")
+        .with_child(TemplateElement::new("text").with_attr_bind("value", "{hello.text}"))
+    );
 
 
 // # Code that requires gfx templates:
@@ -44,8 +44,7 @@ let template = Layout::new()
 let gui = gui::new(&mut gfx_factory, template);
 
 // Bind the controllers to their names
-let controller = MyController { text_value: "Hello World!" };
-gui.bind_controller("MainController", &mut controller);
+gui.register_controller("HelloController", || MyController { text_value: String::from("Test!") });
 
 // Display the Gui
 gui.draw(&mut gfx_stream);
@@ -54,11 +53,17 @@ gui.draw(&mut gfx_stream);
 # Drawbacks
 
 This system is more complex to implement that the previous static widgets system.
+The binding mini-language is a complex piece of the puzzle. It's likely we'll have
+to delay it from being the main way to set bindings and use placeholder helpers
+for now.
 
 # Alternatives
 
-Templating and controllers could be kept in a separate crate from Phosphorus.
+Templating and controllers could be kept in a separate crate from Phosphorus, with
+Phosphorus only having a very tiny widgets system. This however would make Phosphorus
+lose focus.
 
 # Unresolved questions
 
-The specifics on the API on templates still is mostly undecided.
+The binding system's API is still mostly undecided. As well, the mini-language used
+for defining bindings isn't defined formally yet.
